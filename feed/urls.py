@@ -7,7 +7,8 @@ from feed import views as v
 
 
 urlpatterns = [
-    path('',v.firstpage)
+    path('',v.firstpage),
+    path('first/',v.firstpage)
  
 
 

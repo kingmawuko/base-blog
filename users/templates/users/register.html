@@ -1,0 +1,25 @@
+<!-- register html-->
+
+<html>
+     
+
+
+     <form method="POST" action="">
+       <!-- add crispy -->
+          {{form}}
+          {% csrf_token %}
+       
+
+        <button type="submit">submit</button>
+
+
+
+        
+          
+  
+         
+      </form>
+
+      <h1><button ><a href="{% url 'login' %}">back</a></button>
+      </h1>
+</html>
