@@ -1,0 +1,33 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    {% extends 'functions/navbar.html' %}
+    {% block content %}
+<head>
+    <title>Document</title>
+</head>
+<body>
+
+
+{% for i in post %}
+
+<hr>
+
+<h2>  <a href="">{{ i.title }}</a></h2>
+<h3> {{ i.description }} </h3>
+<h2><a href="">comments</a></h2>
+
+<hr>
+
+
+
+{% endfor %}
+</body>
+{% endblock content %}
+</html>
