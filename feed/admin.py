@@ -4,4 +4,5 @@ from . models import*
 
 
 admin.site.register(PostModel)
+admin.site.register(Comment)
 # Register your models here.

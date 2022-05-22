@@ -21,11 +21,23 @@
 
 <h1>  <center> <a href="">{{ i.title }}</a></center></h1>
 <h3> {{ i.description }} </h3>
-<h2><center><a href="">comments</a> </center></h2>
 
+
+
+{% if user.is_authenticated %}
+
+                
+<h3>  <a href="{% url  'comment' %}"> Comment</a></h3> <!-- this needa an id tag -->
+
+                {% else %}
+
+<h3><a href="{% url  'login' %}">Login to comment </a></h3>
+           
+                {% endif %}
 <hr>
-
-
+{% endfor %}
+<!-- comment is related to the related name in the model -->
+{% for i in Comment %} <!-- the comment needs a forighn key -->
 
 {% endfor %}
 </body>

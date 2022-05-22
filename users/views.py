@@ -24,7 +24,7 @@ def Login(request):
             user = User.objects.get(username=username) 
         except:
             # print this 
-            messages.error(request, 'User does not exist') # print this 
+            messages.error(request, 'forgot password?') # print this 
 
         user = authenticate(request, username=username, password=password)
 
@@ -33,13 +33,13 @@ def Login(request):
             login(request, user)
             return redirect('/first/') # feed is in ... 
         else:
-            messages.error(request, 'Username OR password does not exit')
+            messages.error(request, 'Username OR password is incorrect ')
 
     return render(request,'users/login.html')
    
 def Logout(request):
     logout(request)
-    return redirect('/login/') 
+    return redirect('/first/') 
 
 def register(response):
     if response.method == 'POST':
