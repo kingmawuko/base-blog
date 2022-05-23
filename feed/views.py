@@ -33,7 +33,7 @@ def comments(request):
 # this has the original post that the operator created and under here goes the list of comments 
 def inspect(request,id): # requires an id - comment b
     
-    post=get_list_or_404(PostModel,pk=id)
+    post= PostModel.objects.get(pk=id)
     comment = Comment.objects.all()
     # comment form to create comment 
     context={'post':post}

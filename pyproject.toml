@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "base-blog"
+version = "0.1.0"
+description = ""
+authors = ["Uzzal Hossain <de3dm3nu11@gmail.com>"]
+readme = "README.md"
+packages = [{include = "base_blog"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = "^4.0.4"
+ipython = "^8.3.0"
+djlint = "^1.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
