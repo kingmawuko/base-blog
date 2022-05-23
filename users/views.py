@@ -51,3 +51,8 @@ def register(response):
     else:
         form=RegisterForm()
     return render(response,'users/register.html',{'form':form})
+
+
+
+
+# reset password 

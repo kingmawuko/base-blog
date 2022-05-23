@@ -19,7 +19,7 @@
 
 
 
-<h1>  <center> <a href="">{{ i.title }}</a></center></h1>
+<h1><a href="{% url 'inspect' i.id %}">{{ i.title }}</a></h1> <!-- add the inspect with the id here -->
 <h3> {{ i.description }} </h3>
 
 
@@ -31,7 +31,7 @@
 
                 {% else %}
 
-<h3><a href="{% url  'login' %}">Login to comment </a></h3>
+<h3 > <a href="{% url  'login' %}">Login to comment </a></h3>
            
                 {% endif %}
 <hr>

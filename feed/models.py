@@ -18,6 +18,7 @@ class PostModel(models.Model):
 
 
 # should be able to edit/delete post 
+# next time name it as CommentModel
 class Comment(models.Model):
     post=models.ForeignKey(PostModel,related_name='comment',on_delete=models.CASCADE,default=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
