@@ -1,38 +1,27 @@
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
     {% extends 'functions/comment_navbar.html' %}
     {% block content %}
-<head>
-    <title>Document</title>
-</head>
-<body>
-
-
-{% for i in post %}
-
-
-
-<h1><center> {{ i.title }}</center></h1> <!-- add the inspect with the id here -->
-<h3> {{ i.description }} </h3>
-
-
-
-{% endfor %}
-<hr>
-
-<center> <h1> COMMENTS</h1></center>
-
-<!-- comment is related to the related name in the model -->
-{% for i in Comment %} <!-- the comment needs a forighn key -->
-
-{% endfor %}
-</body>
+        <head>
+            <title>Document</title>
+        </head>
+        <body>
+            <h1>
+                <center> {{ post.title }}</center>
+            </h1>
+            <!-- add the inspect with the id here -->
+            <h3>{{ post.description }}</h3>
+        
+        <hr>
+        <center>
+            <h1>COMMENTS</h1>
+        </center>
+        <!-- comment is related to the related name in the model -->
+        <hr>
+        {% for comment in post.comment.all %}
+            <!-- the comment needs a forighn key -->
+            <p>{{ comment.comment }}</p>
+        {% endfor %}
+    </body>
 {% endblock content %}
 </html>
