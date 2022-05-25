@@ -9,19 +9,35 @@
             <h1>
                 <center> {{ post.title }}</center>
             </h1>
-            <!-- add the inspect with the id here -->
+            
             <h3>{{ post.description }}</h3>
         
         <hr>
         <center>
             <h1>COMMENTS</h1>
         </center>
-        <!-- comment is related to the related name in the model -->
+        
         <hr>
         {% for comment in post.comment.all %}
-            <!-- the comment needs a forighn key -->
-            <p>{{ comment.comment }}</p>
+            
+            <!-- if user is suthenticated the author is " Me "-->
+            <h4>{{ comment.author }}</h4>
+            <p>{{ comment.date_added }}</p>
+            <h2>{{ comment.comment }}</h2>
+            <h3> <a href="">reply</a></h3>
+            <h4> reply:0  likes:0 </h4>
+            <hr>
+            
+
+
+
+
         {% endfor %}
     </body>
 {% endblock content %}
 </html>
+
+
+
+
+</style>
