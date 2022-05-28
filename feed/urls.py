@@ -10,7 +10,7 @@ urlpatterns = [
     path('',v.firstpage),
     path('first/',v.firstpage, name='first'),
     path('inspect/<int:id>',v.inspect , name='inspect'),
-    path('comment/',v.comments , name='comment'), # <int:id>  
+    path('comment/<int:id>',v.comment , name='comment'),
  
 
 

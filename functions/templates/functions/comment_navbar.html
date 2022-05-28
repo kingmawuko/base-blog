@@ -30,11 +30,21 @@ li a:hover {
 <body>
 
 <ul>
+    <!-- there has to be a for loop for the comment to work -->
+    <!-- post , form -->
+    
 
+    {% for i in form %}
   <li><a class="active" href="{% url 'first' %}">Return</a></li>
-  <li><a class="active" href="">Add Comment</a></li>
+  <!-- this needs an id - its the same navbar that shows up on every post - t-->
+
+  <li><a class="active" href="">Add Comment</a></li> <!-- this needs an id  -->
  
+  {% endfor %}
 </ul>
+
+
+
 
 </body>
 {% block content %} 

@@ -17,18 +17,25 @@ class PostModel(models.Model):
         return self.title
 
 
-# should be able to edit/delete post 
+
+
+
 # next time name it as CommentModel
 class Comment(models.Model):
+    # this represents the post that the comment is for 
     post=models.ForeignKey(PostModel,related_name='comment',on_delete=models.CASCADE,default=True)
+    # post_ratings - intiger field max_length = 5 min_length = 1
+    # post_rating count 
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    # the text they typed 
     comment = models.TextField(null=True)
     date_added=models.DateTimeField(auto_now=True)
 
 
-    like =None # all three need a foreignkey
-    dislike =None
-    reply_comment = None
+    #like_count =None # this  require an intiger key 
+   # comment_count =None 
+    
+    #reply_comment = None
 
 
 # the person 
