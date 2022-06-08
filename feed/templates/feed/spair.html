@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends 'functions/comment_navbar.html' %}
+    {% block content %}
+        <head>
+            <title>Document</title>
+        </head>
+        <body>
+            <h1>
+                <center> {{ post.title }}</center>
+            </h1>
+            
+            <h3>{{ post.description }}</h3>
+        
+        <hr>
+        <center>
+            <h1> <a href="">COMMENTS</a></h1>
+
+        </center>
+        {{object.title}}
+        
+        <!-- the comment form goes between here-->
+        <hr>
+
+
+
+        <!-- the page that is is on is the same page with all the comments - the url for that is -->
+       
+        <!-- action submits the form to the samepage -->
+        <!-- there is no url called comment -->
+
+    <!-- just bring the id -->  
+<form method="POST" action=""> <!--object.id is the issue , everythnig else is 1 to 1  -->
+            {% csrf_token %}
+            <!-- text area of the form -->
+        <textarea class="form-control" name="text" rows="2" required></textarea>
+        <!-- uder.id-->
+         <input type="hidden" name="user_id" value="{{user.id}}">
+  
+    <button class="btn btn-primary" type="submit">Comment</button>
+</form>
+
+
+
+
+        <hr>
+n 
+
+
+
+
+        {% for comment in post.comment.all %}
+            
+            <!-- if user is suthenticated the author is " Me "-->
+            <h4>{{ comment.author }}</h4>
+            <p>{{ comment.date_added }}</p>
+            <h2>{{ comment.comment }}</h2>
+            <h3> <a href="">reply</a></h3>
+            <h4> reply:0  likes:0 </h4>
+            <hr>
+            
+
+
+
+
+        {% endfor %}
+    </body>
+{% endblock content %}
+</html>
+
+
+
+
+

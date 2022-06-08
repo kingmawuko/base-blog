@@ -11,14 +11,8 @@ class PostModel(models.Model):
     # ratings 
     #image = models.ImageField(upload_to='images', null=True)
   
-    
-
     def __str__(self):
         return self.title
-
-
-
-
 
 # next time name it as CommentModel
 class Comment(models.Model):

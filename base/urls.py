@@ -19,6 +19,8 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path ('',include('feed.urls')),
+    
+    # everything that is not a function 
     path('users/',include('users.urls')),
 
 ]
