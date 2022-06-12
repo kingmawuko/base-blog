@@ -14,11 +14,8 @@ from django.db.models import Avg
 # this needs a dict of all of the posts 
 def firstpage(request):
     post=PostModel.objects.all()
-   
-    # if the button is pressed 
-  
-
-    context={'post':post}
+    user=request.user
+    context={'post':post ,'user':user}
     return render(request,"feed/feed.html",context)
 
 
@@ -26,81 +23,60 @@ def firstpage(request):
 
 
 
-# comment and inspect might have to be the same thing 
-# this has the original post that the operator created and under here goes the list of comments 
-def inspect(request,id): # requires an id - comment b
-
-    
-    post= PostModel.objects.get(pk=id)
-    comment = Comment.objects.all()
-    # comment form to create comment 
-    context={'post':post}
-    return render(request,'feed/inspect.html',context)
 
 
-
-
-# add comment - login is required to comment  
-def comment(request,id): # might need to acess post from the comment model - might need a get_list_404# this also has to have the list of comments 
-
-    # the get object is for getting objects inside of a model 
-    post = get_object_or_404(PostModel,id=id) # this has to be the post 
-
-
-    # if the user pressed the submit button 
-    if request.method =='POST':
-        # get what they typed in for the comment form 
-
-        # this is used to get the users id - 'user_id' is in the post_detail.html line 65 
-        user = User.objects.get(id=request.POST.get('user_id')) 
-
-
-        # this is the text that the user has typed in the post_detail.html page line 67 
-        text = request.POST.get('text')
-        # replace author with the creator of the comments account 
-
-        # post is the one that has the related name 
-        # text is what the user types in 
-        Comment(author=user, post=post, comment=text).save() # this updates the model in the database 
-        messages.success(request, "Your comment has been added successfully.")
-    else:
-        # are these supposed to be different 
-        return redirect('inspect.html', id=id)   
-    return redirect('inspect.html', id=id) # try without the id 
-
+def comment2(request,id):
    
-
-
-def comment2(request, id):
-    # why this and not the other one / why product and not comment - i like id more then slug - what does this thing actually mean 
-    selected_product = get_object_or_404(PostModel, id=id)  
+   # the information on the page 
+    post = get_object_or_404(PostModel, id=id) 
     
 
-    review_form = CommentForm()
+
+    form = CommentForm()
     if request.method == 'POST': # presses submit 
-        review_form = CommentForm(request.POST) 
+        form = CommentForm(request.POST) # form = what the user typed in 
 
-        # if the form is valid check to see if the user has already  created a comment and print a message 
-        if review_form.is_valid(): # if the form is valid 
-            # the condition below exists if the form is valid
-            if selected_product.productReview.filter(user=request.user).exists(): # if a comment exists 
-                messages.info(request, 'You Can Only Review Once...')
-            else:
-                review_form.save()
+      
+        if form.is_valid(): # if somthing is typed 
+          
+                form.save() # save it - save it to the id 
+                return redirect ('inspect' ,id=id)
 
-                messages.success(request, 'Your Review was Submited successfully')
-        
-        else: 
-            messages.warning(request, 'Failed to submit')
-
+         
 
     # get average rating / aggregate ? 
     #avgRate  = Comment.objects.filter(product=selected_product).aggregate(Avg('rate'))
 
-    context = {'selected_product':selected_product, 'review_form':review_form, }
+    context = {'post':post, 'form':form,}
+
     return render(request, 'feed/inspect.html', context) 
 
 
+def like_post(request,id): # this is just the like function not an html 
+    user=request.user
+    if request.method =='POST':
+        # post will have to be replaced with post model 
+        post_id =request.POST.get('post_id')
+        post_obj = PostModel.objects.get(id = post_id)
+        # if the user has liked the post already
+        if user in post_obj . liked.all():
+            post_obj.liked.remove(user)
+        else:
+            post_obj.liked.add(user)
+
+
+        like,created= Like.objects.get_or_create(user=user,post_id=post_id)
+
+        if not created:
+            if like.value == 'Like':
+                like.value = 'Unlike'
+            else:
+                like.value = "Like"
+
+        like.save()
+
+
+    return redirect('feed:inspect', id=id) # # this is the main differenct - the button is in a inspect instead of the feed 
 
 
 
@@ -109,9 +85,6 @@ def comment2(request, id):
 
 
 
-
-def reply():
-    None
 
 
 

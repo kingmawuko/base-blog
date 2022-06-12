@@ -1,0 +1,30 @@
+<!-- extends base is supposed to be here -->
+
+{% block content %}
+{% for obj in qs %}
+
+<h1> {{obj.title}}</h1>
+<p> {{obj.body}}</p>
+<form action="{% url 'feed:like-post' %}" method="POST" class=" ui form ">
+    {% csrf_token %}
+    <input type="hidden" name="post_id" value = "{{obj.id}}">
+    <!-- if the user is not in the list of people that has liked the post -->
+    {% if user not in obj.liked.all %}
+
+    <button class = " ui button positive " type="submit "> like </button>
+
+    {% else %}
+
+    <button class = " ui button negitive " type="submit "> Unlike </button>
+
+
+    {% endif %}
+
+</form>
+
+<strong>
+    {{obj.liked.all.count}} likes 
+</strong>
+
+{% endfor %}
+{% endblock content %}

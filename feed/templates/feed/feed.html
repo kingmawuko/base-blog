@@ -19,7 +19,7 @@
 
 
 
-<h1><a href="{% url 'inspect' i.id %}">{{ i.title }}</a></h1> <!-- add the inspect with the id here -->
+<h1><a href="{% url 'feed:inspect' i.id %}">{{ i.title }}</a></h1> <!-- add the inspect with the id here -->
 <h3> {{ i.description }} </h3>
 
 
@@ -40,6 +40,10 @@
 {% for i in Comment %} <!-- the comment needs a forighn key -->
 
 {% endfor %}
+
+
+
+
 </body>
 {% endblock content %}
 </html>
