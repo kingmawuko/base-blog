@@ -50,6 +50,8 @@ class Comment(models.Model):
     # the text they typed 
     comment = models.TextField(null=True)
     date_added=models.DateTimeField(auto_now=True)
+    liked=models.ManyToManyField(User,default=None,blank=True,related_name='likes')
+    # the comment needs its own likes 
 
 
     #like_count =None # this  require an intiger key 

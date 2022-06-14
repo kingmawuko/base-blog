@@ -49,24 +49,10 @@
 
     
 
-        <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-            <div class="row">
-                <div class="col-sm-12 pt-2" >
-                    <div class="row pt-2">
-                        <div class="col-sm-7"> 
-                            <!-- <h4  class="text-dark" style="width:90%">Reviews</h4> -->
-                      
-                        
-
 
 
                                                         
-                                <form action="" method="POST" >
-                                    {% csrf_token %}
-                                    {{form}}                                                                                                                       
-                                    <button type="submit">Publish</button>
-                                       
-                                </form>
+                                
 
                                     
 
@@ -74,50 +60,46 @@
 
 
 
-
                                         {% for comment in post.comment.all %}            
                                         <!-- if user is suthenticated the author is " Me "-->
-                                        <h4>{{ comment.author }}</h4>
-                                        <p>{{ comment.date_added }}</p>
+                                        <h4>author :{{ comment.author }}</h4>
+                                        <p> date added : {{ comment.date_added }}</p>
                                         <h2>{{ comment.comment }}</h2>
-                                        {% endfor %} 
+                                        <!-- -->
+                                       <h3>like count: {{comment.liked.all.count}}</h3>   <!-- this is liking the post not the comment its self - this is how it worked in the example  -->
+                                        <h4> <a href="">reply</a> <br> <a href="">favorites</a></h4>
+                               
+                                        
 
-      
-                                        <!-- like function -->
-                                        <!-- feed id the app name -->
-                                        <!-- figure out how to get an id in a url  -->
-                                        <!-- its different because this one has an id and the other does not -->
-                                        <form action="{% url 'feed:like-post'.id %}" method="POST" class=" ui form "> <!-- id missing in the action -->
+                                            
+                                                                             <!-- like function -->
+                                            <!-- feed is the app name -->
+                                            <!-- like-post is the path name -->
+                                            <!-- like.id is the path id  -->
+                                            <!--this should work : action="{ url 'feed:like-post' like.id }"  add % before and after the brackets  -->
+
+                                        <form action="" method="POST" class=" ui form "> 
                                             {% csrf_token %}
-                                            <!-- obj has to be replaced -->
-                                            <input type="hidden" name="post_id" value = "{{obj.id}}">
-                                            <!-- if the user is not in the list of people that has liked the post -->
-                                            {% if user not in obj.liked.all %}
-                                        
-                                            <button class = " ui button positive " type="submit "> like </button>
-                                        
-                                            {% else %}
-                                        
-                                            <button class = " ui button negitive " type="submit "> Unlike </button>
-                                        
-                                        
+                                            
+
+                                            
+                                             
+
+                                            <!-- if the user is not in the catagory of users that have likes the comment change the button -->                                      
+                                            {% if user not in comment.liked.all %}                                         
+                                            <button class = " ui button positive " type="submit "> like </button>                                        
+                                            {% else %}                                       
+                                            <button class = " ui button negitive " type="submit "> Unlike </button>                                                     
                                             {% endif %}
                                         
                                         </form>
 
-                                        <hr>                                                                                                                                                                                        
-                                                               
-                                    </div>
-                                 
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> 
-</div>
+                                        <hr>
+
+                                   
+                                        {% endfor %} 
+                                   
+                                    
 
 
 

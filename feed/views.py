@@ -24,35 +24,29 @@ def firstpage(request):
 
 
 
-
+# comment function
+# issue : all comments made link a single post - id issue 
 def comment2(request,id):
    
+
    # the information on the page 
     post = get_object_or_404(PostModel, id=id) 
-    
-
-
     form = CommentForm()
     if request.method == 'POST': # presses submit 
         form = CommentForm(request.POST) # form = what the user typed in 
-
-      
         if form.is_valid(): # if somthing is typed 
-          
                 form.save() # save it - save it to the id 
-                return redirect ('inspect' ,id=id)
-
-         
-
-    # get average rating / aggregate ? 
-    #avgRate  = Comment.objects.filter(product=selected_product).aggregate(Avg('rate'))
-
+                return redirect ('inspect' ,id=id) # this id method might not work
     context = {'post':post, 'form':form,}
-
     return render(request, 'feed/inspect.html', context) 
 
 
-def like_post(request,id): # this is just the like function not an html 
+
+
+
+# leave a like 
+# the id in the form for like post does not work 
+def like_post(request,id): 
     user=request.user
     if request.method =='POST':
         # post will have to be replaced with post model 
@@ -63,20 +57,29 @@ def like_post(request,id): # this is just the like function not an html
             post_obj.liked.remove(user)
         else:
             post_obj.liked.add(user)
-
-
-        like,created= Like.objects.get_or_create(user=user,post_id=post_id)
-
+        like,created= Like.objects.get_or_create(user=user,postmodel_id=post_id)
         if not created:
             if like.value == 'Like':
                 like.value = 'Unlike'
             else:
                 like.value = "Like"
-
         like.save()
+    return redirect('feed:inspect', id=id) # # this is the main differenct - the button is in a inspect instead of the feed - this is not the correct format for bringin in an id
 
 
-    return redirect('feed:inspect', id=id) # # this is the main differenct - the button is in a inspect instead of the feed 
+
+
+
+
+def rating():
+    None
+
+
+
+
+def reply():
+    None
+
 
 
 

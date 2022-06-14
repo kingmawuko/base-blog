@@ -36,15 +36,15 @@ li a:hover {
                    
     <li><a class="active" href="{% url 'logout' %}">Logout</a></li>
   <li><a href="{% url 'feed:first' %}">Article's</a></li>
-  <li><a href="tryit.asp-filename=trycss_navbar_horizontal_black.html#contact">Notifications</a></li>
-  <li><a href="tryit.asp-filename=trycss_navbar_horizontal_black.html#about">More</a></li>
+  <li><a href="">Favorites</a></li>
+  <li><a href="">More</a></li>
                     {% else %}
 
 
       <li><a class="active" href="{% url 'login' %}">Login</a></li>
       <li><a href="{% url 'feed:first' %}">Article's</a></li>
-  <li><a href="tryit.asp-filename=trycss_navbar_horizontal_black.html#contact">Notifications</a></li>
-  <li><a href="tryit.asp-filename=trycss_navbar_horizontal_black.html#about">More</a></li>                 
+  <li><a href="">Favorites</a></li>
+  <li><a href="">More</a></li>                 
                     {% endif %}
  
 </ul>

@@ -16,12 +16,9 @@
 
 
 {% for i in post %}
-
-
-
-<h1><a href="{% url 'feed:inspect' i.id %}">{{ i.title }}</a></h1> <!-- add the inspect with the id here -->
+<h1><a href="{% url 'feed:inspect' i.id %}">{{ i.title }}</a></h1>
 <h3> {{ i.description }} </h3>
-
+<h3> avrage rating : </h3>
 
 
 {% if user.is_authenticated %}
