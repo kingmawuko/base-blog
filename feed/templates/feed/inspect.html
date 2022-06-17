@@ -10,16 +10,13 @@
     <title>Document</title>
 </head>
 <body>
+    {% extends 'functions/comment_navbar.html' %}
 
 
 
 
 
 
-    
-</body>
-
-</html>
 
 
 
@@ -30,18 +27,25 @@
 
             
         <!-- this is not displaying -->
-        <br>
+       
         
             <h1>
                 <center> {{ post.title }}</center>
             </h1>
             
-            <h2> <center> {{ post.description }} </center></h2>
+            <h2> <center> {{ post.description }} </center></h2><br><br>
+
+
+            <hr>
 
            
-
+                 
+           
+          
+            
+            <hr>
     
-    <br>
+   
 
     
         
@@ -56,7 +60,7 @@
 
                                     
 
-
+                   
 
 
 
@@ -67,7 +71,7 @@
                                         <h2>{{ comment.comment }}</h2>
                                         <!-- -->
                                        <h3>like count: {{comment.liked.all.count}}</h3>   <!-- this is liking the post not the comment its self - this is how it worked in the example  -->
-                                        <h4> <a href="">reply</a> <br> <a href="">favorites</a></h4>
+                                      
                                
                                         
 
@@ -78,9 +82,13 @@
                                             <!-- like.id is the path id  -->
                                             <!--this should work : action="{ url 'feed:like-post' like.id }"  add % before and after the brackets  -->
 
-                                        <form action="" method="POST" class=" ui form "> 
+
+                                          
+
+                                        <form action="{% url 'feed:like-post' post.id %}" method="POST" class=" ui form "> 
                                             {% csrf_token %}
                                             
+                                            <input type="hidden" name="post_id" value = "{{obj.id}}">
 
                                             
                                              
@@ -94,6 +102,7 @@
                                         
                                         </form>
 
+
                                         <hr>
 
                                    
@@ -102,7 +111,10 @@
                                     
 
 
-
+    
+</body>
+ </html>
+                                    
 
 {% endblock %}
 

@@ -4,9 +4,11 @@ from . models import *
 from . forms import *
 from django.shortcuts import *
 from django.views.generic import * 
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.db.models import Avg
+
+from django.http import HttpResponse, HttpResponseRedirect 
+
+
+
 # views for feed 
 
 
@@ -46,17 +48,19 @@ def comment2(request,id):
 
 # leave a like 
 # the id in the form for like post does not work 
-def like_post(request,id): 
+def like_post(request,id): # ,post_id,id
     user=request.user
     if request.method =='POST':
         # post will have to be replaced with post model 
-        post_id =request.POST.get('post_id')
-        post_obj = PostModel.objects.get(id = post_id)
+        # this comes from the input iname in the inspect page 
+        post_id =request.POST.get('post_id')  
+        post = PostModel.objects.get(id = post_id) #  
         # if the user has liked the post already
-        if user in post_obj . liked.all():
-            post_obj.liked.remove(user)
+        if user in post . liked.all():
+            post.liked.remove(user)
         else:
-            post_obj.liked.add(user)
+            post.liked.add(user)
+
         like,created= Like.objects.get_or_create(user=user,postmodel_id=post_id)
         if not created:
             if like.value == 'Like':
@@ -65,7 +69,6 @@ def like_post(request,id):
                 like.value = "Like"
         like.save()
     return redirect('feed:inspect', id=id) # # this is the main differenct - the button is in a inspect instead of the feed - this is not the correct format for bringin in an id
-
 
 
 
@@ -80,6 +83,30 @@ def rating():
 def reply():
     None
 
+
+# bug :
+# this is to add an item to the favorites list 
+def add_to_fav(request,id): 
+    post=get_object_or_404(PostModel,id=id)
+    # if its been added to the favorites do this 
+    if post.favourites.exists():
+        post.favourites.remove(request.user)
+        return render(request,'feed/favorites_list.html') 
+        # else do this 
+    else:
+        post.favourites.add(request.user)
+
+        return render(request,'feed/favorites_list.html')# this should return the user back to where they were before they pressed the add to fav button 
+    
+
+
+
+
+def fav_list(request): # this should have an id ? 
+   # from the title filter out 
+    new = PostModel.title.filter(favourite_list=request.user) # error :'DeferredAttribute' object has no attribute 'filter'
+    context={'new':new}
+    return render (request,'feed/favorites_list.html',context)
 
 
 

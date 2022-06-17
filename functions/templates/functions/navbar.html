@@ -36,7 +36,7 @@ li a:hover {
                    
     <li><a class="active" href="{% url 'logout' %}">Logout</a></li>
   <li><a href="{% url 'feed:first' %}">Article's</a></li>
-  <li><a href="">Favorites</a></li>
+  <li><a href="{% url 'feed:favorite_list' %}">saved list </a></li>
   <li><a href="">More</a></li>
                     {% else %}
 

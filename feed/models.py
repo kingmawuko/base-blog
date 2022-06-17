@@ -8,6 +8,8 @@ class PostModel(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     liked=models.ManyToManyField(User,default=None,blank=True,related_name='liked')
+    favourites = models.ManyToManyField(User,related_name='favourite',default=None,blank=True)
+    
     
     # ratings 
     #image = models.ImageField(upload_to='images', null=True)
