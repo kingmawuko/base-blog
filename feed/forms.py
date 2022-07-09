@@ -1,5 +1,5 @@
 from django import forms
-from . models import PostModel,Comment
+from . models import PostModel,CommentModel
 
 
 
@@ -9,11 +9,8 @@ class PostForm(forms.ModelForm):
         model=PostModel
         fields=['title','description']
 
-
-
-
 class CommentForm(forms.ModelForm):
     class Meta:
-        model=Comment
+        model=CommentModel 
         fields=['comment']
-        widgets = {'comments':forms.TextInput(attrs={'class':'form-control'}),}
+      

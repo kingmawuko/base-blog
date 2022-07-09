@@ -12,14 +12,6 @@
 <body>
     {% extends 'functions/comment_navbar.html' %}
 
-
-
-
-
-
-
-
-
 <li><a class="active" href="{% url 'feed:first' %}">Return</a></li>
 
 
@@ -39,8 +31,15 @@
             <hr>
 
            
-                 
-           
+            <!-- action : This value can be overridden by a formaction attribute on a <button> or <input> element -->
+
+           <form action="" method="POST">
+            {% csrf_token %}
+            {{form}}
+            <!-- this requires an input field? -->
+            
+            <button type="submit">submit </button>
+           </form>
           
             
             <hr>
@@ -48,29 +47,16 @@
    
 
     
-        
- 
-
-    
-
-
-
-                                                        
-                                
-
-                                    
-
-                   
-
-
 
                                         {% for comment in post.comment.all %}            
                                         <!-- if user is suthenticated the author is " Me "-->
                                         <h4>author :{{ comment.author }}</h4>
                                         <p> date added : {{ comment.date_added }}</p>
                                         <h2>{{ comment.comment }}</h2>
+
                                         <!-- -->
-                                       <h3>like count: {{comment.liked.all.count}}</h3>   <!-- this is liking the post not the comment its self - this is how it worked in the example  -->
+
+                                       <h4>like count: {{comment.liked.all.count}} <br>  <a href="">reply</a> count : N/a</h4>   <!-- this is liking the post not the comment its self - this is how it worked in the example  -->
                                       
                                
                                         
@@ -87,17 +73,23 @@
 
                                         <form action="{% url 'feed:like-post' post.id %}" method="POST" class=" ui form "> 
                                             {% csrf_token %}
-                                            
-                                            <input type="hidden" name="post_id" value = "{{obj.id}}">
 
-                                            
-                                             
+                                            <!-- the input field has -->
 
-                                            <!-- if the user is not in the catagory of users that have likes the comment change the button -->                                      
+                                            <!-- BUG -->
+                                            <!--Q -->
+
+
+                                             <!--A -->
+                                              <!--the input field has to be inside another field  > < -->
+                                              <!-- every form needs an imput field - how else will it get submitted or saved to the database -->
+
+
+                                            <label for="">  <input type="hidden" name="post_id" value = "{{obj.id}}"></label>                                                                                                                                                                         <!-- if the user is not in the catagory of users that have likes the comment change the button -->                                      
                                             {% if user not in comment.liked.all %}                                         
                                             <button class = " ui button positive " type="submit "> like </button>                                        
                                             {% else %}                                       
-                                            <button class = " ui button negitive " type="submit "> Unlike </button>                                                     
+                                            <button class = " ui button negitive " type="submit " class=" btn btn-secondary"> Unlike </button>                                                     
                                             {% endif %}
                                         
                                         </form>
