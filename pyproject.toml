@@ -8,7 +8,7 @@ packages = [{include = "base_blog"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Django = "^4.0.4"
+Django = "^4.0.6"
 ipython = "^8.3.0"
 djlint = "^1.1.1"
 
